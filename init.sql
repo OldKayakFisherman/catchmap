@@ -10,7 +10,7 @@ CREATE TABLE audit_logs
     message text,
     severity text,
     event_type text,
-    event_date timestamp default current_timestamp,
+    event_date timestamp default current_timestamp(),
     success boolean,
     source text,
     detail text,
@@ -24,7 +24,7 @@ CREATE TABLE accounts
     email text not null,
     credentials text not null,
     token text not null,
-    created timestamp default current_timestamp,
+    created timestamp default current_timestamp(),
     muted_till timestamp,
     banned_till timestamp
 );

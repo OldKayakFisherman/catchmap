@@ -1,15 +1,15 @@
 <script setup>
    import {onMounted, ref} from 'vue'
    import LocationService from '../services/LocationService'
-   import { useLocationStore } from '@/stores/location';
+   import { useLocationStore } from '@/stores/location'
    import { storeToRefs } from 'pinia'
 
    const store = useLocationStore()
 
    const {latitude, longitude, locationAvailable, updateCoordinates} = store
 
-   syncCoordinates(){
-      
+   function syncCoordinates(){
+      console.log("Hello")
    }
 
    onMounted(() => {
