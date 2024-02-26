@@ -1,8 +1,7 @@
 from dotenv import load_dotenv
 import os
-import bcrypt
 
-class SettingsService:
+class _SettingsResult:
 
     def __init__(self):
         load_dotenv()
@@ -16,17 +15,14 @@ class SettingsService:
         self._db_host = str(os.getenv("DB.HOST"))
         self._db_name = str(os.getenv("DB.NAME"))
 
-
-
     @property
     def secret_token(self) -> str:
         return self._secret_token
 
-
     @property
     def default_username(self) -> str:
         return self._default_username
-
+        
     @property
     def default_password(self) -> str:
         return self._default_password
@@ -48,16 +44,22 @@ class SettingsService:
         return self._db_name
 
     @property
-    def db_port(self) ->str:
+    def db_port(self) -> int:
         return self._db_port
 
+    def __str__(self) -> str:
+        return f"""
+            Secret Token: {self.secret_token}
+            Default Username: {self.default_username}
+            Default Password: {self.default_password}
+            DB User: {self.db_user}
+            DB Password: {self.db_password}
+            DB Host: {self.db_host}
+            DB Name: {self.db_name}
+            DB Port: {self.db_port}
+        """
+
+def get_settings():
+    return _SettingsResult()
 
 
-class SecurityUtilityService:
-
-    def hash_password(self, password):
-        
-        password = password.encode('utf-8')
-        password_salt = bcrypt.gensalt()
-
-        return bcrypt.hashpw(password=password, salt=password_salt)

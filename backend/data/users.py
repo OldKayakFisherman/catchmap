@@ -1,11 +1,6 @@
-from contextlib import contextmanager
-from psycopg2.pool import SimpleConnectionPool
-from psycopg2.extras import RealDictCursor
-from backend.data.sql import statements
-import secrets
 import services.security as security
-
-
+import secrets
+from .sql import statements
 
 def ensure_data_default(cursor, settings):
 
@@ -13,7 +8,8 @@ def ensure_data_default(cursor, settings):
 
         add_user(settings.default_username, 
                  security.hash_password(settings.default_password), 
-                 secrets.token_urlsafe(12))
+                 secrets.token_urlsafe(12),
+                 cursor)
 
 
 def add_user(email: str, password: str, token: str, cursor):
@@ -30,4 +26,3 @@ def get_user(email: str, cursor):
         parameters = (email, )
         cur.execute(statement, parameters)
         return cur.fetchone()
-    

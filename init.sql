@@ -23,7 +23,7 @@ CREATE TABLE accounts
     email text not null,
     credentials text not null,
     token text not null,
-    created timestamp default current_timestamp()
+    created timestamp default current_timestamp
 );
 
 
