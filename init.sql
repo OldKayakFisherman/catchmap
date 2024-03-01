@@ -10,7 +10,7 @@ CREATE TABLE audit_logs
     message text,
     severity text,
     event_type text,
-    event_date timestamp default current_timestamp(),
+    event_date timestamp default current_timestamp,
     success boolean,
     source text,
     detail text,
